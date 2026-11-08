@@ -189,6 +189,69 @@
             font-size: 0.85rem;
             background-color: var(--bg-section);
         }
+
+        /* サイト統計 */
+        .site-statistics {
+            width: min(820px, calc(100% - 40px));
+            margin: 54px auto 36px;
+            padding: clamp(28px, 5vw, 48px) 24px;
+            border: 1px solid var(--border-light);
+            border-radius: 8px;
+            background: var(--bg-section);
+            text-align: center;
+        }
+        .visitor-counter-label,
+        .development-age-label {
+            margin: 0;
+            color: var(--text-muted);
+            font-size: 0.78rem;
+            letter-spacing: 0.16em;
+            font-weight: 600;
+        }
+        .visitor-counter-number {
+            display: block;
+            margin: 8px 0 0;
+            color: var(--color-primary);
+            font-size: clamp(2.3rem, 6vw, 3.7rem);
+            line-height: 1.02;
+            font-weight: 750;
+            font-variant-numeric: tabular-nums;
+            letter-spacing: -0.045em;
+        }
+        .visitor-counter-note {
+            margin: 1px 0 0;
+            color: var(--text-muted);
+            font-size: 0.78rem;
+        }
+        .statistics-divider {
+            width: min(360px, 70%);
+            height: 1px;
+            margin: 15px auto;
+            background: var(--border-light);
+        }
+        .development-age-number {
+            display: block;
+            margin: 9px 0 0;
+            color: var(--color-primary);
+            font-size: clamp(2.3rem, 6vw, 3.7rem);
+            line-height: 1.1;
+            font-weight: 700;
+            font-variant-numeric: tabular-nums;
+            letter-spacing: -0.03em;
+        }
+        .development-age-note {
+            margin: 9px 0 0;
+            color: var(--text-muted);
+            font-size: 0.78rem;
+        }
+        @media (max-width: 520px) {
+            .site-statistics {
+                width: calc(100% - 28px);
+                margin-top: 36px;
+                padding: 30px 16px;
+            }
+        }
+
     </style>
 </head>
 <body>
@@ -213,15 +276,33 @@
             <h1 class="conlang-logo">Shltrafin</h1>
             <p class="site-description">人工言語「Shltrafin」の公式設定資料およびオンライン辞典</p>
         </div>
+        
 
         <!-- イントロダクション文章 -->
         <p>shltrafinは、動詞の活用を極限まで単純化する目的で制作されている人工言語です。このサイトでは、一から言語を学ぶことができるオンライン文法書や、語彙の設計プロセス、これまでに翻訳した様々な文章などの資料を公開しています。</p>
+       
 
         <!-- 翻訳サンプル（Avendia風のアリス翻訳オマージュなど） -->
         <div class="translation-block">
             <span class="conlang-sample-text">gma lua powneza gm leng.</span>
             <div class="japanese-translation">「私はこの言語を作った。」 — 翻訳作品集より抜粋</div>
         </div>
+        <!-- サイト統計 -->
+        <section class="site-statistics" aria-label="サイトの記録">
+            <div class="visitor-counter">
+                <p class="visitor-counter-label">TOTAL VISITORS</p>
+                <output id="visitor-count" class="visitor-counter-number" aria-live="polite">---</output>
+                <p id="visitor-counter-note" class="visitor-counter-note">累計訪問者数</p>
+            </div>
+
+            <div class="statistics-divider" aria-hidden="true"></div>
+
+            <div class="development-age">
+                <p class="development-age-label">DAYS SINCE DEVELOPMENT STARTED</p>
+                <output id="development-days" class="development-age-number">---</output>
+                <p class="development-age-note">シャルトラフ語の開発開始日：2026年9月25日</p>
+            </div>
+        </section>
 
         <!-- ドキュメント目次グリッド -->
         <div class="index-grid">
@@ -254,6 +335,59 @@
     <footer>
         <p>&copy;2026 Shltraf <br>Licensed under CC BY-NC-ND 4.0</p>
     </footer>
+    <script>
+    (() => {
+        // サイト専用の公開カウンターキー。変更すると別カウンターになります。
+        const COUNTER_KEY = "shltrafin-portal-visitors-2026-9d7c4b81f2";
+        const API = "https://countapi.mileshilliard.com/api/v1";
+        const STORAGE_KEY = "shltrafin_visitor_counted";
+        const countElement = document.getElementById("visitor-count");
+        const noteElement = document.getElementById("visitor-counter-note");
 
+        const showCount = (value) => {
+            const number = Number(value);
+            if (Number.isFinite(number)) {
+                countElement.textContent = number.toLocaleString("ja-JP");
+                noteElement.textContent = "これまでの訪問者数";
+            } else {
+                throw new Error("カウンターの値が不正です");
+            }
+        };
+
+        async function updateVisitorCount() {
+            try {
+                // 同じブラウザからの再訪では加算せず、初回訪問時だけ加算する。
+                const alreadyCounted = localStorage.getItem(STORAGE_KEY) === "1";
+                const action = alreadyCounted ? "get" : "hit";
+                const response = await fetch(`${API}/${action}/${COUNTER_KEY}`, {
+                    method: "GET",
+                    cache: "no-store"
+                });
+                if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                const data = await response.json();
+                showCount(data.value);
+                if (!alreadyCounted) localStorage.setItem(STORAGE_KEY, "1");
+            } catch (error) {
+                countElement.textContent = "—";
+                noteElement.textContent = "訪問者数を取得できませんでした";
+                console.error("Visitor counter error:", error);
+            }
+        }
+
+        updateVisitorCount();
+    })();
+    </script>
+
+
+    <script>
+    (() => {
+        const startDate = new Date(2026, 8, 25); // 2026年9月25日（月は0始まり）
+        const today = new Date();
+        const todayDate = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+        const elapsed = Math.max(0, Math.floor((todayDate - startDate) / 86400000));
+        const output = document.getElementById("development-days");
+        if (output) output.textContent = `${elapsed.toLocaleString("ja-JP")}日`;
+    })();
+    </script>
 </body>
 </html>
