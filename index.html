@@ -251,8 +251,100 @@
                 padding: 30px 16px;
             }
         }
+        
+    
+    /* ===== Shltrafin Portal theme: teal / yellow / cream ===== */
+    :root {
+      --bg:#E8E6CA; --bg-body:#E8E6CA;
+      --surface:#F2F0DA; --bg-section:#F2F0DA;
+      --text:#1d3a40; --text-main:#1d3a40;
+      --muted:#4d6a6e; --text-muted:#4d6a6e;
+      --primary:#266E7B; --color-primary:#266E7B;
+      --accent:#FFC90F; --color-accent:#FFC90F;
+      --border:#cbc8a0; --border-light:#cbc8a0;
+      --teal-dark:#1b5560; --card:#FBFAEF;
+    }
+    html { background:#E8E6CA; }
+    body {
+      color:#1d3a40; min-height:100vh;
+      background:
+        radial-gradient(ellipse at 100% 0%, rgba(255,201,15,.28) 0%, rgba(255,201,15,0) 45%),
+        linear-gradient(165deg, #F4F2DC 0%, #E8E6CA 45%, #BFD8CF 100%);
+      background-attachment:fixed;
+    }
 
-    </style>
+    /* header */
+    header, .site-header {
+      background:#266E7B; border-bottom:4px solid #FFC90F;
+      -webkit-backdrop-filter:none; backdrop-filter:none;
+    }
+    .brand, .header-title { color:#E8E6CA; letter-spacing:.08em; }
+    .brand:hover, .header-title:hover { color:#FFC90F; }
+    nav a, .global-nav a { color:#E8E6CA; opacity:.92; }
+    nav a:hover, .global-nav a:hover { color:#FFC90F; opacity:1; text-decoration:none; }
+    nav a[aria-current="page"], .global-nav a[aria-current="page"] {
+      color:#FFC90F; opacity:1; font-weight:700;
+      box-shadow:inset 0 -3px 0 #FFC90F; padding-bottom:2px;
+    }
+
+
+    /* eyebrow: yellow tag */
+    .eyebrow, .document-topline {
+      display:inline-block; padding:2px 11px; border-radius:3px;
+      background:#FFC90F; color:#1d3a40; letter-spacing:.14em;
+    }
+    h1 { color:#266E7B; }
+
+    /* cards */
+    .entry, .card, .translation-card, .index-card, .side-panel, .example-box, .table-wrap {
+      background:#FBFAEF; border-color:#cbc8a0;
+    }
+    .entry, .card, .translation-card, .index-card {
+      border-radius:10px; border-top:4px solid #266E7B;
+    }
+    .entry:hover, .card:hover, .index-card:hover {
+      border-color:#cbc8a0; border-top-color:#FFC90F;
+      box-shadow:0 8px 22px rgba(38,110,123,.16);
+    }
+    .card-head, .doc-table th, .side-panel, .archive-note, .note, .empty-note, .translation-block {
+      background:#F2F0DA;
+    }
+    .entry-category { background:#FFC90F; color:#1d3a40; }
+    .type { display:inline-block; padding:1px 9px; border-radius:3px; background:#FFC90F; color:#1d3a40; }
+    .section-head, h1, .site-statistics { border-color:#266E7B; }
+    .section-head { border-bottom-width:2px; }
+    .site-statistics { border-top:4px solid #FFC90F; border-radius:10px; background:#FBFAEF; }
+    .note, .archive-note, .empty-note { border-left:4px solid #FFC90F; border-radius:0 6px 6px 0; }
+    .translation-block { border-left:4px solid #FFC90F; }
+    .lang-inline { background:#E8E6CA; }
+    .example-box { border-left:4px solid #FFC90F; }
+    .document h2::before { color:#266E7B; }
+    .document h1 { border-bottom:3px solid #FFC90F; }
+
+    /* grammar sidebar */
+    .sidebar { background:rgba(251,250,239,.55); border-right:1px solid #cbc8a0; }
+    .toc button:hover:not(:disabled) { background:#E8E6CA; color:#266E7B; }
+    .toc button[aria-current="true"] { background:#266E7B; color:#FBFAEF; border-left-color:#FFC90F; }
+    .toc button:disabled { color:#8c9a98; }
+
+    /* footer */
+    footer, .page-footer {
+      background:#266E7B; color:#E8E6CA; border-top:4px solid #FFC90F;
+    }
+    a:focus-visible, button:focus-visible { outline:3px solid #FFC90F; outline-offset:3px; }
+
+    /* index only */
+    header { max-width:none; margin:0; padding:15px max(20px, calc((100vw - 1000px)/2)); }
+    .hero-section {
+      background:#266E7B; border-bottom:6px solid #FFC90F; border-radius:12px;
+      padding:48px 20px 40px;
+    }
+    .conlang-logo { color:#E8E6CA; }
+    .site-description { color:#E8E6CA; }
+    .index-card h3 { color:#266E7B; }
+    .visitor-counter-number, .development-age-number { color:#266E7B; }
+    @media (max-width:520px) { header { flex-direction:column; align-items:flex-start; gap:8px; } header nav a:first-child { margin-left:0; } }
+  </style>
 </head>
 <body>
 
@@ -279,10 +371,20 @@
         
 
         <!-- イントロダクション文章 -->
-        <p>shltrafinは、動詞の活用を極限まで単純化する目的で制作されている人工言語です。このサイトでは、一から言語を学ぶことができるオンライン文法書や、語彙の設計プロセス、これまでに翻訳した様々な文章などの資料を公開しています。</p>
+        <h1>シャルトラフ語とは</h1>
+        <p>shltrafinは、動詞の活用を極限まで単純化する目的で制作されている人工言語です。<br>
+        このサイトでは、一から言語を学ぶことができるオンライン文法書や、語彙の設計プロセス、これまでに翻訳した様々な文章などの資料を公開しています。<br>
+        正式表記は以下の通り<br>
+        漢字：帋語<br>
+        日本語：シャルトラフ語<br>
+        英語：shltrafian<br>
+                ロシア語：Шартрах<br>
+        アラビア語：لغة شالترلاف<br>この表記以外は使用しないでください。<br>
+                <p>シャルトラフ語のイメージカラーは#ffc90f、#266e7b、#e8e6caになっています。<p></p>
        
 
         <!-- 翻訳サンプル（Avendia風のアリス翻訳オマージュなど） -->
+        <h1>例文</h1>
         <div class="translation-block">
             <span class="conlang-sample-text">gma lua powneza gm leng.</span>
             <div class="japanese-translation">「私はこの言語を作った。」 — 翻訳作品集より抜粋</div>
@@ -305,6 +407,7 @@
         </section>
 
         <!-- ドキュメント目次グリッド -->
+        <h1>メニュー</h1>
         <div class="index-grid">
             
             <a href="document.html" class="index-card">
@@ -328,7 +431,7 @@
             </a>
 
         </div>
-
+            
     </div>
 
     <!-- シンプルなフッター -->
