@@ -102,6 +102,33 @@ a:focus-visible{outline:3px solid rgba(15,76,129,.28);outline-offset:3px}
       background:#266E7B; color:#E8E6CA; border-top:4px solid #FFC90F;
     }
     a:focus-visible, button:focus-visible { outline:3px solid #FFC90F; outline-offset:3px; }
+    /* Firefox */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: #FFC90F #266E7B; /* つまみ  トラック */
+}
+
+/* Chrome / Edge / Safari */
+::-webkit-scrollbar {
+  width: 20px;   /* 縦スクロールバーの太さ */
+  height: 12px;  /* 横スクロールバーの太さ */
+}
+::-webkit-scrollbar-track {
+  background: #266E7B;
+  border-left: 1px solid #266E7B;
+}
+::-webkit-scrollbar-thumb {
+  background: #266E7B;
+  border-radius: 999px;
+  border: 3px solid #E8E6CA; /* トラックと同じ色で縁取ると、つまみが細く見える */
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #266E7B;
+}
+::-webkit-scrollbar-thumb:active {
+  background: #266E7B;
+}
+
   </style>
 </head>
 <body>
