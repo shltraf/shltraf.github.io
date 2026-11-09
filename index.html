@@ -163,6 +163,29 @@
             display: flex;
             align-items: center;
         }
+.index-doc {
+            border: 1px solid var(--border-light);
+            padding: 25px;
+            border-radius: 6px;
+            text-decoration: none;
+            color: inherit;
+            background-color: #ffffff;
+            transition: all 0.2s ease;
+        }
+
+        .index-doc:hover {
+            border-color: var(--color-primary);
+            box-shadow: 0 4px 12px rgba(15, 76, 129, 0.05);
+        }
+
+        .index-doc h3 {
+            margin: 0 0 10px 0;
+            font-size: 1.15rem;
+            color: var(--color-primary);
+            display: flex;
+            align-items: center;
+        }
+
 
         /* 差し色（ゴールド）の小さなワンポイントマーク */
         .index-card h3::before {
@@ -397,6 +420,7 @@ html {
         
 
         <!-- イントロダクション文章 -->
+             <section class="index-doc" aria-label="シャルトラフ語とは">
         <h1>シャルトラフ語とは</h1>
         <p>shltrafinは、動詞の活用を極限まで単純化する目的で制作されている人工言語です。<br>
         このサイトでは、一から言語を学ぶことができるオンライン文法書や、語彙の設計プロセス、これまでに翻訳した様々な文章などの資料を公開しています。<br>
@@ -407,6 +431,7 @@ html {
                 ロシア語：Шартрах<br>
         アラビア語：لغة شالترلاف<br>この表記以外は使用しないでください。<br>
                 <p>シャルトラフ語のイメージカラーは#ffc90f、#266e7b、#e8e6caになっています。<p></p>
+      </section>
        
 
         <!-- 翻訳サンプル（Avendia風のアリス翻訳オマージュなど） -->
