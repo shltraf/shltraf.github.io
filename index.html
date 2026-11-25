@@ -511,7 +511,7 @@ html {
 
         async function updateVisitorCount() {
             try {
-                if (!localStorage.getItem('shltrafin_visited')) {
+                
 
                 // 同じブラウザからの再訪では加算せず、初回訪問時だけ加算する。
                 const alreadyCounted = localStorage.getItem(STORAGE_KEY) === "1";
@@ -529,7 +529,7 @@ html {
                 countElement.textContent = "—";
                 noteElement.textContent = "訪問者数を取得できませんでした";
                 console.error("Visitor counter error:", error);
-                localStorage.setItem('shltrafin_visited', 'true');
+                
             }
         }
 
