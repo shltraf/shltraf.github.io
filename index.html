@@ -11,7 +11,7 @@
         -------------------------------------------------- */
         @font-face {
             font-family: 'Shltraf_12';
-            src: url('Shltraf_12-Regular.ttf') format('truetype'); 
+            src: url('Shltraf_anek-Regular.ttf') format('truetype'); 
             font-display: swap;
         }
 
@@ -82,7 +82,7 @@
         /* ウェルカムセクション（独自フォントを美しく見せる巨大ロゴ） */
         .hero-section {
             text-align: center;
-            margin-bottom: 70px;
+            margin-bottom: 60px;
             padding-bottom: 40px;
             border-bottom: 1px solid var(--border-light);
         }
@@ -90,15 +90,16 @@
         .conlang-logo {
             font-family: 'Shltraf_12', sans-serif;
             font-size: 4.8rem;
+            font-weight: normal;
             color: var(--color-primary);
             margin: 0;
-            letter-spacing: 2px;
+            letter-spacing: 0.5px;
         }
 
         .site-description {
             color: var(--text-muted);
             font-size: 1.05rem;
-            margin: 15px 0 0 0;
+            margin: 10px 0 0 0;
             letter-spacing: 1px;
         }
 
@@ -511,6 +512,7 @@ html {
         async function updateVisitorCount() {
             try {
                 if (!localStorage.getItem('shltrafin_visited')) {
+
                 // 同じブラウザからの再訪では加算せず、初回訪問時だけ加算する。
                 const alreadyCounted = localStorage.getItem(STORAGE_KEY) === "1";
                 const action = alreadyCounted ? "get" : "hit";
@@ -522,12 +524,12 @@ html {
                 const data = await response.json();
                 showCount(data.value);
                 if (!alreadyCounted) localStorage.setItem(STORAGE_KEY, "1");
-                localStorage.setItem('shltrafin_visited', 'true');
-}
+                
             } catch (error) {
                 countElement.textContent = "—";
                 noteElement.textContent = "訪問者数を取得できませんでした";
                 console.error("Visitor counter error:", error);
+                localStorage.setItem('shltrafin_visited', 'true');
             }
         }
 
